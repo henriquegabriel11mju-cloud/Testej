@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>🎁 Missão Presente</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -13,7 +15,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg,#090016,#19002e,#08000f);
+  background: linear-gradient(135deg, #080012, #1b0033, #08000f);
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -25,9 +27,17 @@ body {
   padding: 25px 18px 60px;
 }
 
+.card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(210,150,255,0.35);
+  border-radius: 22px;
+  padding: 28px 20px;
+  margin-top: 25px;
+  box-shadow: 0 0 25px rgba(150,50,255,0.18);
+}
+
 h1 {
   color: #d9a7ff;
-  font-size: 34px;
   text-shadow: 0 0 15px #9d45ff;
 }
 
@@ -40,19 +50,6 @@ p {
   line-height: 1.6;
 }
 
-.card {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(210,150,255,.35);
-  border-radius: 22px;
-  padding: 28px 20px;
-  margin-top: 25px;
-  box-shadow: 0 0 25px rgba(150,50,255,.18);
-}
-
-.hidden {
-  display: none !important;
-}
-
 button {
   border: none;
   border-radius: 13px;
@@ -63,11 +60,6 @@ button {
   font-size: 15px;
   background: linear-gradient(135deg,#8d32ff,#c258ff);
   box-shadow: 0 5px 15px rgba(130,40,255,.35);
-  cursor: pointer;
-}
-
-button:active {
-  transform: scale(.96);
 }
 
 .choice {
@@ -76,20 +68,15 @@ button:active {
   margin: 12px auto;
 }
 
-.next {
-  margin-top: 20px;
+.progress {
+  color: #b889d8;
+  font-size: 14px;
 }
 
 .big {
   font-size: 30px;
   color: #e4b8ff;
   font-weight: bold;
-}
-
-.progress {
-  color: #b889d8;
-  font-size: 14px;
-  margin-top: 10px;
 }
 
 #scratch {
@@ -102,7 +89,6 @@ button:active {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  cursor: pointer;
 }
 
 #scratch.revealed {
@@ -124,20 +110,6 @@ button:active {
   }
 }
 
-.reveal {
-  animation: aparecer 1s ease;
-}
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: scale(.7);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 </style>
 </head>
 
@@ -145,186 +117,206 @@ button:active {
 
 <div class="container">
 
-<!-- INÍCIO -->
+<!-- ================= INÍCIO ================= -->
+
 <div id="inicio" class="card">
-  <h1>🎁 MISSÃO PRESENTE</h1>
 
-  <h2>Operação: 15 anos</h2>
+<h1>🎁 MISSÃO PRESENTE</h1>
 
-  <p>
-    Você recebeu acesso a um arquivo confidencial.
-    Existe um presente escondido nessa missão...
-  </p>
+<h2>Operação: 15 anos</h2>
 
-  <button onclick="iniciar()">
-    🚀 INICIAR MISSÃO
-  </button>
-</div>
+<p>
+Você recebeu acesso a um arquivo confidencial.
+Existe um presente escondido nessa missão...
+</p>
 
-
-<!-- ETAPA 1 -->
-<div id="etapa1" class="card hidden">
-
-  <div class="progress">ETAPA 1 DE 4</div>
-
-  <h2>📁 ARQUIVO CONFIDENCIAL</h2>
-
-  <p>
-    Antes de descobrir o presente,
-    você precisa escolher como começar a investigação.
-  </p>
-
-  <p><b>Qual será sua estratégia?</b></p>
-
-  <button class="choice" onclick="escolha(1)">
-    🎀 Quero descobrir logo
-  </button>
-
-  <button class="choice" onclick="escolha(2)">
-    🕵️ Quero investigar primeiro
-  </button>
-
-  <button class="choice" onclick="escolha(3)">
-    😈 Vou tentar descobrir sozinho
-  </button>
-
-  <p id="resultadoEscolha"></p>
-
-  <button id="btnEtapa2" class="hidden next"
-          onclick="irEtapa(1,2)">
-    CONTINUAR ➡️
-  </button>
+<button onclick="iniciarMissao()">
+🚀 INICIAR MISSÃO
+</button>
 
 </div>
 
 
-<!-- ETAPA 2 -->
-<div id="etapa2" class="card hidden">
+<!-- ================= ETAPA 1 ================= -->
 
-  <div class="progress">ETAPA 2 DE 4</div>
+<div id="etapa1" class="card" style="display:none;">
 
-  <h2>🔐 PISTA SECRETA</h2>
+<div class="progress">ETAPA 1 DE 4</div>
 
-  <p>
-    Você encontrou um arquivo escondido.
-  </p>
+<h2>📁 ARQUIVO CONFIDENCIAL</h2>
 
-  <p>
-    Mas ele está bloqueado...
-  </p>
+<p>
+Antes de descobrir o presente,
+você precisa escolher como começar a investigação.
+</p>
 
-  <button onclick="liberarPista()">
-    🔓 DESBLOQUEAR PISTA
-  </button>
+<p><b>Qual será sua estratégia?</b></p>
 
-  <p id="pista" class="hidden">
-    👀 <b>PISTA:</b><br><br>
-    O presente tem alguma coisa a ver
-    com aquilo que você gosta de fazer.
-  </p>
+<button class="choice" onclick="escolher(1)">
+🎀 Quero descobrir logo
+</button>
 
-  <button id="btnEtapa3" class="hidden next"
-          onclick="irEtapa(2,3)">
-    PRÓXIMA ETAPA ➡️
-  </button>
+<button class="choice" onclick="escolher(2)">
+🕵️ Quero investigar primeiro
+</button>
 
-</div>
+<button class="choice" onclick="escolher(3)">
+😈 Vou tentar descobrir sozinho
+</button>
 
+<p id="respostaEscolha"></p>
 
-<!-- ETAPA 3 -->
-<div id="etapa3" class="card hidden">
-
-  <div class="progress">ETAPA 3 DE 4</div>
-
-  <h2>🎟️ RASPADINHA SECRETA</h2>
-
-  <p>
-    Uma última pista foi escondida.
-  </p>
-
-  <p>
-    Toque no cartão para revelar.
-  </p>
-
-  <div id="scratch" onclick="raspar()">
-    🔒 TOQUE PARA REVELAR
-  </div>
-
-  <p id="textoRaspadinha"></p>
-
-  <button id="btnEtapa4" class="hidden next"
-          onclick="irEtapa(3,4)">
-    CONTINUAR ➡️
-  </button>
+<button id="continuar1"
+style="display:none;"
+onclick="irPara(1,2)">
+CONTINUAR ➡️
+</button>
 
 </div>
 
 
-<!-- ETAPA 4 -->
-<div id="etapa4" class="card hidden">
+<!-- ================= ETAPA 2 ================= -->
 
-  <div class="progress">ETAPA 4 DE 4</div>
+<div id="etapa2" class="card" style="display:none;">
 
-  <h2>🧩 ÚLTIMA ETAPA</h2>
+<div class="progress">ETAPA 2 DE 4</div>
 
-  <p>
-    O arquivo final está protegido.
-  </p>
+<h2>🔐 PISTA SECRETA</h2>
 
-  <p>
-    Clique no botão para reconstruir a mensagem.
-  </p>
+<p>
+Você encontrou um arquivo escondido.
+</p>
 
-  <button onclick="descriptografar()">
-    🔓 DESCRIPTOGRAFAR
-  </button>
+<p>
+Mas ele está bloqueado...
+</p>
 
-  <p id="codigo" class="big"></p>
+<button onclick="abrirPista()">
+🔓 DESBLOQUEAR PISTA
+</button>
 
-  <button id="btnFinal" class="hidden next"
-          onclick="mostrarFinal()">
-    REVELAR PRESENTE 🎁
-  </button>
+<p id="pista"
+style="display:none;">
+
+👀 <b>PISTA:</b>
+
+<br><br>
+
+O presente tem alguma coisa a ver
+com aquilo que você gosta de fazer.
+
+</p>
+
+<button id="continuar2"
+style="display:none;"
+onclick="irPara(2,3)">
+PRÓXIMA ETAPA ➡️
+</button>
 
 </div>
 
 
-<!-- FINAL -->
-<div id="final" class="card hidden reveal">
+<!-- ================= ETAPA 3 ================= -->
 
-  <h1>🎉 MISSÃO CONCLUÍDA!</h1>
+<div id="etapa3" class="card" style="display:none;">
 
-  <p>
-    Todas as pistas foram descobertas.
-  </p>
+<div class="progress">ETAPA 3 DE 4</div>
 
-  <p>
-    O arquivo secreto revelou finalmente o presente...
-  </p>
+<h2>🎟️ RASPADINHA SECRETA</h2>
 
-  <p class="big">
-    ⚽ UMA CHUTEIRA ⚽
-  </p>
+<p>
+Uma última pista foi escondida.
+</p>
 
-  <p>
-    👟 O presente estava escondido o tempo todo.
-  </p>
+<p>
+Toque no cartão para revelar.
+</p>
 
-  <button onclick="comemorar()">
-    🎊 COMEMORAR
-  </button>
+<div id="scratch" onclick="raspar()">
 
-  <br>
+🔒 TOQUE PARA REVELAR
 
-  <a href="https://br.shp.ee/pLKptgme"
-     target="_blank"
-     style="text-decoration:none;">
+</div>
 
-    <button>
-      👟 VER A CHUTEIRA
-    </button>
+<p id="textoRaspadinha"></p>
 
-  </a>
+<button id="continuar3"
+style="display:none;"
+onclick="irPara(3,4)">
+CONTINUAR ➡️
+</button>
+
+</div>
+
+
+<!-- ================= ETAPA 4 ================= -->
+
+<div id="etapa4" class="card" style="display:none;">
+
+<div class="progress">ETAPA 4 DE 4</div>
+
+<h2>🧩 ÚLTIMA ETAPA</h2>
+
+<p>
+O arquivo final está protegido.
+</p>
+
+<p>
+Clique no botão várias vezes para reconstruir
+a mensagem.
+</p>
+
+<button onclick="descriptografar()">
+🔓 DESCRIPTOGRAFAR
+</button>
+
+<p id="codigo" class="big"></p>
+
+<button id="revelar"
+style="display:none;"
+onclick="mostrarFinal()">
+🎁 REVELAR PRESENTE
+</button>
+
+</div>
+
+
+<!-- ================= FINAL ================= -->
+
+<div id="final" class="card" style="display:none;">
+
+<h1>🎉 MISSÃO CONCLUÍDA!</h1>
+
+<p>
+Todas as pistas foram descobertas.
+</p>
+
+<p>
+O arquivo secreto finalmente revelou o presente...
+</p>
+
+<p class="big">
+⚽ UMA CHUTEIRA ⚽
+</p>
+
+<p>
+👟 O presente estava escondido o tempo todo.
+</p>
+
+<button onclick="comemorar()">
+🎊 COMEMORAR
+</button>
+
+<br>
+
+<a href="https://br.shp.ee/pLKptgme"
+target="_blank">
+
+<button>
+👟 VER A CHUTEIRA
+</button>
+
+</a>
 
 </div>
 
@@ -333,107 +325,125 @@ button:active {
 
 <script>
 
-function esconderTudo() {
+/* =================================================
+   FUNÇÃO PRINCIPAL PARA MOSTRAR APENAS UMA ETAPA
+   ================================================= */
 
-  document.getElementById("inicio").classList.add("hidden");
-  document.getElementById("etapa1").classList.add("hidden");
-  document.getElementById("etapa2").classList.add("hidden");
-  document.getElementById("etapa3").classList.add("hidden");
-  document.getElementById("etapa4").classList.add("hidden");
-  document.getElementById("final").classList.add("hidden");
+function mostrarSomente(id) {
+
+  document.getElementById("inicio").style.display = "none";
+
+  document.getElementById("etapa1").style.display = "none";
+  document.getElementById("etapa2").style.display = "none";
+  document.getElementById("etapa3").style.display = "none";
+  document.getElementById("etapa4").style.display = "none";
+
+  document.getElementById("final").style.display = "none";
+
+  document.getElementById(id).style.display = "block";
+
+  window.scrollTo(0,0);
+}
+
+
+/* =================================================
+   COMEÇAR
+   ================================================= */
+
+function iniciarMissao() {
+
+  mostrarSomente("etapa1");
 
 }
 
 
-function iniciar() {
+/* =================================================
+   ESCOLHA DA PRIMEIRA ETAPA
+   ================================================= */
 
-  esconderTudo();
+function escolher(numero) {
 
-  document.getElementById("etapa1")
-    .classList.remove("hidden");
+  let texto = "";
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  if(numero == 1) {
 
-}
+    texto =
+    "👀 Calma... a missão ainda está só começando.";
 
-
-function escolha(numero) {
-
-  let mensagem = "";
-
-  if(numero === 1) {
-    mensagem =
-      "👀 Calma... a missão ainda está só começando.";
   }
 
-  if(numero === 2) {
-    mensagem =
-      "🕵️ Boa escolha. Investigador detectado!";
+  if(numero == 2) {
+
+    texto =
+    "🕵️ Boa escolha. Investigador detectado!";
+
   }
 
-  if(numero === 3) {
-    mensagem =
-      "😈 Tentando descobrir sozinho? Vamos ver se consegue...";
+  if(numero == 3) {
+
+    texto =
+    "😈 Tentando descobrir sozinho? Vamos ver se consegue...";
+
   }
 
-  document.getElementById("resultadoEscolha")
-    .innerText = mensagem;
+  document.getElementById("respostaEscolha").innerText = texto;
 
-  document.getElementById("btnEtapa2")
-    .classList.remove("hidden");
+  document.getElementById("continuar1").style.display = "inline-block";
 
 }
 
 
-function irEtapa(atual, proxima) {
+/* =================================================
+   IR PARA PRÓXIMA ETAPA
+   ================================================= */
 
-  document.getElementById("etapa" + atual)
-    .classList.add("hidden");
+function irPara(atual, proxima) {
 
-  document.getElementById("etapa" + proxima)
-    .classList.remove("hidden");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  mostrarSomente("etapa" + proxima);
 
 }
 
 
-function liberarPista() {
+/* =================================================
+   PISTA
+   ================================================= */
 
-  document.getElementById("pista")
-    .classList.remove("hidden");
+function abrirPista() {
 
-  document.getElementById("btnEtapa3")
-    .classList.remove("hidden");
+  document.getElementById("pista").style.display = "block";
+
+  document.getElementById("continuar2").style.display =
+  "inline-block";
 
 }
 
+
+/* =================================================
+   RASPADINHA
+   ================================================= */
 
 function raspar() {
 
-  const caixa =
-    document.getElementById("scratch");
+  let caixa =
+  document.getElementById("scratch");
 
   caixa.classList.add("revealed");
 
   caixa.innerHTML =
-    "✨ PISTA REVELADA ✨";
+  "✨ PISTA REVELADA ✨";
 
-  document.getElementById("textoRaspadinha")
-    .innerHTML =
-    "👟 Parece que o presente tem alguma coisa a ver com os seus pés...";
+  document.getElementById("textoRaspadinha").innerHTML =
+  "👟 Parece que o presente tem alguma coisa a ver com os seus pés...";
 
-  document.getElementById("btnEtapa4")
-    .classList.remove("hidden");
+  document.getElementById("continuar3").style.display =
+  "inline-block";
 
 }
 
+
+/* =================================================
+   DESCRIPTOGRAFAR
+   ================================================= */
 
 let passos = 0;
 
@@ -441,62 +451,69 @@ function descriptografar() {
 
   passos++;
 
-  let texto = "";
+  let mensagem = "";
 
-  if(passos === 1) {
-    texto = "P...";
+  if(passos == 1) {
+
+    mensagem = "P...";
+
   }
 
-  else if(passos === 2) {
-    texto = "PR...";
+  else if(passos == 2) {
+
+    mensagem = "PR...";
+
   }
 
-  else if(passos === 3) {
-    texto = "PRE...";
+  else if(passos == 3) {
+
+    mensagem = "PRE...";
+
   }
 
-  else if(passos === 4) {
-    texto = "PRES...";
+  else if(passos == 4) {
+
+    mensagem = "PRES...";
+
   }
 
-  else if(passos === 5) {
-    texto = "PRESENTE...";
+  else if(passos == 5) {
+
+    mensagem = "PRESENTE...";
+
   }
 
   else {
-    texto = "🎁 PRESENTE ENCONTRADO!";
-  }
 
-  document.getElementById("codigo")
-    .innerText = texto;
+    mensagem = "🎁 PRESENTE ENCONTRADO!";
 
-  if(passos >= 6) {
-
-    document.getElementById("btnFinal")
-      .classList.remove("hidden");
+    document.getElementById("revelar").style.display =
+    "inline-block";
 
   }
+
+  document.getElementById("codigo").innerText =
+  mensagem;
 
 }
 
 
+/* =================================================
+   FINAL
+   ================================================= */
+
 function mostrarFinal() {
 
-  document.getElementById("etapa4")
-    .classList.add("hidden");
-
-  document.getElementById("final")
-    .classList.remove("hidden");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  mostrarSomente("final");
 
   comemorar();
 
 }
 
+
+/* =================================================
+   CONFETES
+   ================================================= */
 
 function comemorar() {
 
@@ -511,27 +528,30 @@ function comemorar() {
 
   for(let i = 0; i < 50; i++) {
 
-    const confete =
-      document.createElement("div");
+    let confete =
+    document.createElement("div");
 
-    confete.className = "confete";
+    confete.className =
+    "confete";
 
     confete.innerText =
-      emojis[
-        Math.floor(Math.random() * emojis.length)
-      ];
+    emojis[
+      Math.floor(Math.random() * emojis.length)
+    ];
 
     confete.style.left =
-      Math.random() * 100 + "vw";
+    Math.random() * 100 + "vw";
 
     confete.style.animationDuration =
-      (2 + Math.random() * 3) + "s";
+    (2 + Math.random() * 3) + "s";
 
     document.body.appendChild(confete);
 
-    setTimeout(() => {
+    setTimeout(function() {
+
       confete.remove();
-    }, 5000);
+
+    },5000);
 
   }
 
