@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Missão Presente — 15 anos</title>
+<title>🎁 Missão Presente</title>
 
 <style>
 * {
@@ -12,100 +12,120 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #08001a, #16002e, #05000d);
-  color: white;
-  text-align: center;
   min-height: 100vh;
-  overflow-x: hidden;
+  background: linear-gradient(135deg,#090016,#19002e,#08000f);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .container {
-  max-width: 700px;
+  max-width: 650px;
   margin: auto;
   padding: 25px 18px 60px;
 }
 
 h1 {
-  font-size: 38px;
-  margin-top: 25px;
-  color: #d8a7ff;
-  text-shadow: 0 0 15px #9b4dff;
+  color: #d9a7ff;
+  font-size: 34px;
+  text-shadow: 0 0 15px #9d45ff;
 }
 
 h2 {
-  color: #e8c9ff;
+  color: #e5c7ff;
 }
 
 p {
-  line-height: 1.6;
   color: #ddd;
+  line-height: 1.6;
 }
 
 .card {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(210,150,255,0.35);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(210,150,255,.35);
   border-radius: 22px;
-  padding: 25px;
-  margin: 22px 0;
-  box-shadow: 0 0 25px rgba(140,50,255,0.15);
-  backdrop-filter: blur(8px);
+  padding: 28px 20px;
+  margin-top: 25px;
+  box-shadow: 0 0 25px rgba(150,50,255,.18);
+}
+
+.hidden {
+  display: none !important;
 }
 
 button {
   border: none;
-  border-radius: 14px;
+  border-radius: 13px;
   padding: 15px 22px;
   margin: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
   color: white;
-  background: linear-gradient(135deg,#8d35ff,#c05cff);
+  font-weight: bold;
+  font-size: 15px;
+  background: linear-gradient(135deg,#8d32ff,#c258ff);
   box-shadow: 0 5px 15px rgba(130,40,255,.35);
+  cursor: pointer;
 }
 
-button:hover {
-  transform: scale(1.04);
-}
-
-.hidden {
-  display: none;
+button:active {
+  transform: scale(.96);
 }
 
 .choice {
+  width: 90%;
   display: block;
-  width: 100%;
-  margin: 12px 0;
+  margin: 12px auto;
 }
 
-.secret {
-  font-size: 20px;
-  color: #f2d8ff;
+.next {
+  margin-top: 20px;
+}
+
+.big {
+  font-size: 30px;
+  color: #e4b8ff;
   font-weight: bold;
+}
+
+.progress {
+  color: #b889d8;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 #scratch {
   width: 280px;
-  height: 100px;
-  margin: 20px auto;
+  height: 105px;
+  margin: 25px auto;
+  border-radius: 16px;
   background: #777;
-  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  color: white;
   font-weight: bold;
-  user-select: none;
+  cursor: pointer;
 }
 
 #scratch.revealed {
-  background: linear-gradient(135deg,#681cff,#c95cff);
+  background: linear-gradient(135deg,#6d20ff,#c457ff);
 }
 
-#final {
-  animation: aparecer 1.2s ease;
+.confete {
+  position: fixed;
+  top: -30px;
+  font-size: 25px;
+  animation: cair 3s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes cair {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.reveal {
+  animation: aparecer 1s ease;
 }
 
 @keyframes aparecer {
@@ -118,27 +138,6 @@ button:hover {
     transform: scale(1);
   }
 }
-
-.confete {
-  position: fixed;
-  top: -20px;
-  font-size: 24px;
-  animation: cair 3s linear forwards;
-  pointer-events: none;
-}
-
-@keyframes cair {
-  to {
-    transform: translateY(110vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-.big {
-  font-size: 32px;
-  color: #e6b7ff;
-  font-weight: bold;
-}
 </style>
 </head>
 
@@ -146,211 +145,381 @@ button:hover {
 
 <div class="container">
 
+<!-- INÍCIO -->
+<div id="inicio" class="card">
   <h1>🎁 MISSÃO PRESENTE</h1>
 
-  <div class="card">
-    <h2>Operação: 15 anos</h2>
-    <p>
-      Você recebeu acesso a um arquivo confidencial.
-      Existe um presente escondido nessa missão...
-    </p>
+  <h2>Operação: 15 anos</h2>
 
-    <button onclick="comecar()">INICIAR MISSÃO 🚀</button>
-  </div>
+  <p>
+    Você recebeu acesso a um arquivo confidencial.
+    Existe um presente escondido nessa missão...
+  </p>
 
-  <div id="missao" class="hidden">
+  <button onclick="iniciar()">
+    🚀 INICIAR MISSÃO
+  </button>
+</div>
 
-    <div class="card">
-      <h2>📁 ARQUIVO CONFIDENCIAL</h2>
 
-      <p>
-        Antes de descobrir o presente, você precisa fazer algumas escolhas.
-      </p>
+<!-- ETAPA 1 -->
+<div id="etapa1" class="card hidden">
 
-      <p class="secret">
-        Cuidado... algumas respostas podem revelar pistas.
-      </p>
+  <div class="progress">ETAPA 1 DE 4</div>
 
-      <button class="choice" onclick="responder(1)">
-        🎀 Quero descobrir logo
-      </button>
+  <h2>📁 ARQUIVO CONFIDENCIAL</h2>
 
-      <button class="choice" onclick="responder(2)">
-        🕵️ Quero investigar primeiro
-      </button>
+  <p>
+    Antes de descobrir o presente,
+    você precisa escolher como começar a investigação.
+  </p>
 
-      <button class="choice" onclick="responder(3)">
-        😈 Vou tentar descobrir sozinho
-      </button>
+  <p><b>Qual será sua estratégia?</b></p>
 
-      <p id="resposta"></p>
-    </div>
+  <button class="choice" onclick="escolha(1)">
+    🎀 Quero descobrir logo
+  </button>
 
-    <div class="card">
-      <h2>🔐 PISTA SECRETA</h2>
+  <button class="choice" onclick="escolha(2)">
+    🕵️ Quero investigar primeiro
+  </button>
 
-      <p>
-        Nem tudo que parece ser o presente é realmente o presente.
-      </p>
+  <button class="choice" onclick="escolha(3)">
+    😈 Vou tentar descobrir sozinho
+  </button>
 
-      <button onclick="mostrarPista()">DESBLOQUEAR PISTA</button>
+  <p id="resultadoEscolha"></p>
 
-      <p id="pista" class="hidden secret">
-        O presente tem algo a ver com aquilo que você gosta de fazer.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>🎟️ RASPADINHA</h2>
-
-      <p>
-        Toque no cartão para revelar o que está escondido.
-      </p>
-
-      <div id="scratch" onclick="raspar()">
-        🔒 TOQUE PARA REVELAR
-      </div>
-
-      <p id="scratchText"></p>
-    </div>
-
-    <div class="card">
-      <h2>🧩 ÚLTIMA ETAPA</h2>
-
-      <p>
-        O arquivo final está protegido.
-        Clique várias vezes para reconstruir a mensagem.
-      </p>
-
-      <button onclick="revelarPalavra()">DESCRIPTOGRAFAR 🔓</button>
-
-      <p id="palavra" class="big"></p>
-    </div>
-
-    <div id="final" class="card hidden">
-
-      <h2>🎉 MISSÃO CONCLUÍDA!</h2>
-
-      <p>
-        Depois de todas essas pistas...
-      </p>
-
-      <p class="big">
-        O PRESENTE É:
-      </p>
-
-      <p class="big">
-        ⚽ UMA CHUTEIRA ⚽
-      </p>
-
-      <p>
-        Agora você descobriu o segredo. ❤️
-      </p>
-
-      <button onclick="confetes()">🎊 COMEMORAR</button>
-
-      <br><br>
-
-      <a
-        href="https://br.shp.ee/pLKptgme"
-        target="_blank"
-        style="text-decoration:none;"
-      >
-        <button>👟 VER A CHUTEIRA</button>
-      </a>
-
-    </div>
-
-  </div>
+  <button id="btnEtapa2" class="hidden next"
+          onclick="irEtapa(1,2)">
+    CONTINUAR ➡️
+  </button>
 
 </div>
 
+
+<!-- ETAPA 2 -->
+<div id="etapa2" class="card hidden">
+
+  <div class="progress">ETAPA 2 DE 4</div>
+
+  <h2>🔐 PISTA SECRETA</h2>
+
+  <p>
+    Você encontrou um arquivo escondido.
+  </p>
+
+  <p>
+    Mas ele está bloqueado...
+  </p>
+
+  <button onclick="liberarPista()">
+    🔓 DESBLOQUEAR PISTA
+  </button>
+
+  <p id="pista" class="hidden">
+    👀 <b>PISTA:</b><br><br>
+    O presente tem alguma coisa a ver
+    com aquilo que você gosta de fazer.
+  </p>
+
+  <button id="btnEtapa3" class="hidden next"
+          onclick="irEtapa(2,3)">
+    PRÓXIMA ETAPA ➡️
+  </button>
+
+</div>
+
+
+<!-- ETAPA 3 -->
+<div id="etapa3" class="card hidden">
+
+  <div class="progress">ETAPA 3 DE 4</div>
+
+  <h2>🎟️ RASPADINHA SECRETA</h2>
+
+  <p>
+    Uma última pista foi escondida.
+  </p>
+
+  <p>
+    Toque no cartão para revelar.
+  </p>
+
+  <div id="scratch" onclick="raspar()">
+    🔒 TOQUE PARA REVELAR
+  </div>
+
+  <p id="textoRaspadinha"></p>
+
+  <button id="btnEtapa4" class="hidden next"
+          onclick="irEtapa(3,4)">
+    CONTINUAR ➡️
+  </button>
+
+</div>
+
+
+<!-- ETAPA 4 -->
+<div id="etapa4" class="card hidden">
+
+  <div class="progress">ETAPA 4 DE 4</div>
+
+  <h2>🧩 ÚLTIMA ETAPA</h2>
+
+  <p>
+    O arquivo final está protegido.
+  </p>
+
+  <p>
+    Clique no botão para reconstruir a mensagem.
+  </p>
+
+  <button onclick="descriptografar()">
+    🔓 DESCRIPTOGRAFAR
+  </button>
+
+  <p id="codigo" class="big"></p>
+
+  <button id="btnFinal" class="hidden next"
+          onclick="mostrarFinal()">
+    REVELAR PRESENTE 🎁
+  </button>
+
+</div>
+
+
+<!-- FINAL -->
+<div id="final" class="card hidden reveal">
+
+  <h1>🎉 MISSÃO CONCLUÍDA!</h1>
+
+  <p>
+    Todas as pistas foram descobertas.
+  </p>
+
+  <p>
+    O arquivo secreto revelou finalmente o presente...
+  </p>
+
+  <p class="big">
+    ⚽ UMA CHUTEIRA ⚽
+  </p>
+
+  <p>
+    👟 O presente estava escondido o tempo todo.
+  </p>
+
+  <button onclick="comemorar()">
+    🎊 COMEMORAR
+  </button>
+
+  <br>
+
+  <a href="https://br.shp.ee/pLKptgme"
+     target="_blank"
+     style="text-decoration:none;">
+
+    <button>
+      👟 VER A CHUTEIRA
+    </button>
+
+  </a>
+
+</div>
+
+</div>
+
+
 <script>
 
-function comecar() {
-  document.getElementById("missao").classList.remove("hidden");
-  window.scrollTo({
-    top: document.getElementById("missao").offsetTop,
-    behavior: "smooth"
-  });
+function esconderTudo() {
+
+  document.getElementById("inicio").classList.add("hidden");
+  document.getElementById("etapa1").classList.add("hidden");
+  document.getElementById("etapa2").classList.add("hidden");
+  document.getElementById("etapa3").classList.add("hidden");
+  document.getElementById("etapa4").classList.add("hidden");
+  document.getElementById("final").classList.add("hidden");
+
 }
 
-function responder(numero) {
 
-  let texto = "";
+function iniciar() {
+
+  esconderTudo();
+
+  document.getElementById("etapa1")
+    .classList.remove("hidden");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function escolha(numero) {
+
+  let mensagem = "";
 
   if(numero === 1) {
-    texto = "👀 Calma! A missão ainda está começando...";
+    mensagem =
+      "👀 Calma... a missão ainda está só começando.";
   }
 
   if(numero === 2) {
-    texto = "🕵️ Boa escolha. Investigador detectado!";
+    mensagem =
+      "🕵️ Boa escolha. Investigador detectado!";
   }
 
   if(numero === 3) {
-    texto = "😈 Hmm... tentando trapacear a missão?";
+    mensagem =
+      "😈 Tentando descobrir sozinho? Vamos ver se consegue...";
   }
 
-  document.getElementById("resposta").innerText = texto;
+  document.getElementById("resultadoEscolha")
+    .innerText = mensagem;
+
+  document.getElementById("btnEtapa2")
+    .classList.remove("hidden");
+
 }
 
-function mostrarPista() {
-  document.getElementById("pista").classList.remove("hidden");
+
+function irEtapa(atual, proxima) {
+
+  document.getElementById("etapa" + atual)
+    .classList.add("hidden");
+
+  document.getElementById("etapa" + proxima)
+    .classList.remove("hidden");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
 }
+
+
+function liberarPista() {
+
+  document.getElementById("pista")
+    .classList.remove("hidden");
+
+  document.getElementById("btnEtapa3")
+    .classList.remove("hidden");
+
+}
+
 
 function raspar() {
 
-  const caixa = document.getElementById("scratch");
+  const caixa =
+    document.getElementById("scratch");
 
   caixa.classList.add("revealed");
-  caixa.innerHTML = "✨ PISTA DESCOBERTA ✨";
 
-  document.getElementById("scratchText").innerText =
-    "👟 Tem alguma coisa esperando pelos seus pés...";
+  caixa.innerHTML =
+    "✨ PISTA REVELADA ✨";
+
+  document.getElementById("textoRaspadinha")
+    .innerHTML =
+    "👟 Parece que o presente tem alguma coisa a ver com os seus pés...";
+
+  document.getElementById("btnEtapa4")
+    .classList.remove("hidden");
+
 }
 
-let etapa = 0;
 
-function revelarPalavra() {
+let passos = 0;
 
-  etapa++;
+function descriptografar() {
+
+  passos++;
 
   let texto = "";
 
-  if(etapa === 1) texto = "EU";
-  if(etapa === 2) texto = "EU QUERO";
-  if(etapa === 3) texto = "EU QUERO UMA";
-  if(etapa >= 4) {
-    texto = "EU QUERO UMA CHUTEIRA";
-
-    document.getElementById("final").classList.remove("hidden");
-
-    setTimeout(() => {
-      document.getElementById("final").scrollIntoView({
-        behavior: "smooth"
-      });
-    }, 300);
+  if(passos === 1) {
+    texto = "P...";
   }
 
-  document.getElementById("palavra").innerText = texto;
-
-  if(etapa >= 4) {
-    confetes();
+  else if(passos === 2) {
+    texto = "PR...";
   }
+
+  else if(passos === 3) {
+    texto = "PRE...";
+  }
+
+  else if(passos === 4) {
+    texto = "PRES...";
+  }
+
+  else if(passos === 5) {
+    texto = "PRESENTE...";
+  }
+
+  else {
+    texto = "🎁 PRESENTE ENCONTRADO!";
+  }
+
+  document.getElementById("codigo")
+    .innerText = texto;
+
+  if(passos >= 6) {
+
+    document.getElementById("btnFinal")
+      .classList.remove("hidden");
+
+  }
+
 }
 
-function confetes() {
 
-  const emojis = ["🎉","🎊","✨","💜","⚽","👟"];
+function mostrarFinal() {
 
-  for(let i = 0; i < 40; i++) {
+  document.getElementById("etapa4")
+    .classList.add("hidden");
 
-    const confete = document.createElement("div");
+  document.getElementById("final")
+    .classList.remove("hidden");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  comemorar();
+
+}
+
+
+function comemorar() {
+
+  const emojis = [
+    "🎉",
+    "🎊",
+    "✨",
+    "💜",
+    "⚽",
+    "👟"
+  ];
+
+  for(let i = 0; i < 50; i++) {
+
+    const confete =
+      document.createElement("div");
 
     confete.className = "confete";
 
     confete.innerText =
-      emojis[Math.floor(Math.random() * emojis.length)];
+      emojis[
+        Math.floor(Math.random() * emojis.length)
+      ];
 
     confete.style.left =
       Math.random() * 100 + "vw";
@@ -363,7 +532,9 @@ function confetes() {
     setTimeout(() => {
       confete.remove();
     }, 5000);
+
   }
+
 }
 
 </script>
